@@ -1,8 +1,12 @@
 def solution(array, commands):
     answer = []
-    slice = []
-    for i in commands:
-        slice = array[i[0]-1:i[1]]
-        slice.sort()
-        answer.append(slice[i[2] - 1])
+    list = []
+    
+    for i in range(len(commands)):
+        start = commands[i][0]
+        finish = commands[i][1]
+        cut = commands[i][2]
+        list = sorted(array[start-1:finish])
+        answer.append(list[cut-1])
+        
     return answer
