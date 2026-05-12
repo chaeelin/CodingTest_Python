@@ -1,10 +1,16 @@
 def solution(nums):
-    pick = len(nums) / int(2)
+    answer = 0
+    pick = int(len(nums)/2)
+    count = 0
+    nums = set(nums)
     
-    set_nums = set(nums)
-    list_nums = list(set_nums)
-    
-    if len(list_nums) <= pick:
-        return len(list_nums)
+    if len(nums) < pick:
+        answer = int(len(nums))
     else:
-        return pick
+        for i in range(1, len(nums)+1):
+            count += 1
+            
+            if count == pick:
+                answer = pick
+
+    return answer
