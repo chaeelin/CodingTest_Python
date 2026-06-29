@@ -2,26 +2,22 @@ import math
 
 def solution(progresses, speeds):
     answer = []
-    remainingTime = []
-    
-    for p, s in zip(progresses, speeds):
-        remainingTime.append(math.ceil((100 - p) / s))
-    
+    days = []
     count = 1
+    max = 0
     
-    if not remainingTime:
-        return null
-
-    currentTime = remainingTime[0]
-    
-    for i in range(1, len(remainingTime)):
-        if remainingTime[i] <= currentTime:
-            count += 1
-        else:
+    for i in range(len(progresses)):
+        days.append(math.ceil((100 - progresses[i]) / speeds[i]))
+        
+    for i in range(len(days)-1):
+        if max < days[i]:
+            max = days[i]
+            
+        if days[i+1] > max:
             answer.append(count)
             count = 1
-            currentTime = remainingTime[i]
-    
+        else: count += 1
+        
     answer.append(count)
-    
+                
     return answer
