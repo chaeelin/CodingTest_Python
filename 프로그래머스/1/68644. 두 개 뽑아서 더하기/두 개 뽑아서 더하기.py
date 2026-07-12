@@ -1,15 +1,13 @@
 def solution(numbers):
-    result = 0
     answer = []
     
-    for i,num in enumerate(numbers):
-        for j,num1 in enumerate(numbers):
-            if j == i:
+    for idx1 in range(len(numbers)):
+        for idx2 in range(len(numbers)):
+            if idx1 == idx2:
                 pass
             else:
-                result = num+num1
+                result = numbers[idx1]+numbers[idx2]
                 answer.append(result)
-                
-    answer = list(set(answer)) 
+    answer = list(set(answer))
     answer.sort()
     return answer
