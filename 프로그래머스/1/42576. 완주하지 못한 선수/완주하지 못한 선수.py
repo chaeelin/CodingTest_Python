@@ -1,12 +1,9 @@
-def solution(participant, completion):    
-    dic = {}
+from collections import Counter
+
+def solution(participant, completion):
+    answer = ''
     
-    for part in participant:
-        dic[part] = dic.get(part,0) + 1
-    for com in completion:
-        dic[com] -= 1
+    answer = Counter(participant) - Counter(completion)
+    answer = "".join(answer.keys())
     
-    for k,v in dic.items():
-        if v > 0:
-            return k
-    
+    return answer
