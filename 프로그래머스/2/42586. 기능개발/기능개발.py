@@ -1,23 +1,24 @@
-import math
-
 def solution(progresses, speeds):
     answer = []
-    days = []
+    stack = []
     count = 1
-    max = 0
     
     for i in range(len(progresses)):
-        days.append(math.ceil((100 - progresses[i]) / speeds[i]))
-        
-    for i in range(len(days)-1):
-        if max < days[i]:
-            max = days[i]
-            
-        if days[i+1] > max:
+        if ((100-progresses[i]) % speeds[i] > 0):
+            stack.append(((100-progresses[i]) // speeds[i])+1)
+        else:
+            stack.append((100-progresses[i]) // speeds[i])
+    
+    current = stack[0]
+    
+    for i in range(len(stack)-1):
+        if current >= stack[i+1]:
+            count +=1
+        else:
             answer.append(count)
+            current = stack[i+1]
             count = 1
-        else: count += 1
-        
+            
     answer.append(count)
-                
+    
     return answer
