@@ -1,11 +1,20 @@
 def solution(sizes):
     answer = 0
-    big = []
-    small = []
-
-    for i,j in sizes:
-        big.append(max(i,j))
-        small.append(min(i,j))
-        answer = max(big) * max(small)
+    tmp = 0
+    first = []
+    second = []
+    
+    for i in sizes:
+        if i[0] < i[1]:
+            tmp = i[0]
+            i[0] = i[1]
+            i[1] = tmp
+    
+    
+    for i in range(len(sizes)):
+        first.append(sizes[i][0])
+        second.append(sizes[i][1])
         
+    answer = max(first) * max(second)
+    
     return answer
