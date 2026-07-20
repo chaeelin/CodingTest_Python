@@ -1,29 +1,24 @@
 from itertools import permutations
 
-def is_prime(n):
-    if n < 2:
-        return False
-    for i in range(2, n):
-        if n % i == 0:
-            return False
-    return True
-
 def solution(numbers):
     answer = 0
-    count = 0
-    put = []
     
-    for i in numbers:
-        count += 1
-        result = list(permutations(numbers, count))
-        
-        for i in result:
-            put.append(int("".join(i)))
-        
-    put = set(put)
-        
-    for i in put:
-        if is_prime(int(i)):
+    def is_prime(num):
+        if num < 2:
+            return False
+        for i in range(2, num):
+            if num % i == 0:
+                return False
+        return True
+    
+    nums = set()
+    
+    for r in range(1, len(numbers) + 1):
+        for p in permutations(numbers, r):
+            nums.add(int(''.join(p)))
+            
+    for i in nums:
+        if is_prime(i) == True:
             answer += 1
-        
+            
     return answer
