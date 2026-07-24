@@ -6,7 +6,6 @@ def solution(numbers):
             if inx1 != inx2:
                 answer.append(numbers[inx1] + numbers[inx2])
                 
-    answer = list(set(answer))
-    answer.sort()
-    
+    answer = sorted(set(answer))
+
     return answer
