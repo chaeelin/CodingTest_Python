@@ -1,17 +1,22 @@
 def solution(word):
-    vowels = ['A', 'E', 'I', 'O', 'U']
-    dict_list = []
+    count = 0
+    answer = 0
     
-    def make_words(current):
-        if len(current) == 6:
-            return
+    def dfs(alpa): 
+        nonlocal count, answer
         
-        dict_list.append(current)
+        if alpa == word:
+            answer = count 
+            return count
         
-        for v in vowels:
-            make_words(current + v)
+        if len(alpa) > 5:
+            return 
+        
+        count += 1
+        
+        for i in "AEIOU":
+            dfs(alpa + i)
+
+    dfs("")
     
-    for v in vowels:
-        make_words(v)
-    
-    return dict_list.index(word) + 1
+    return answer
