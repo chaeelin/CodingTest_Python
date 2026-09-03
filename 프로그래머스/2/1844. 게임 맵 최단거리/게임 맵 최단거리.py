@@ -1,32 +1,31 @@
 from collections import deque
 
 def solution(maps):
+    answer = 0
     n = len(maps)
     m = len(maps[0])
-    dist = [[0] * m for _ in range(n)]
     
-    q = deque()
-    q.append((0,0))
-    dist[0][0] = 1
+    visited = [[False] * m for _ in range(n)]
+    distance = [[0] * m for _ in range(n)]
     
-    dx = [-1, 1, 0, 0]
-    dy = [0, 0, -1, 1]
-    
-    while q:
-        x, y = q.popleft()
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
+    def bfs(sx, sy):
+        queue = deque([(sx,sy)])
+        visited[sx][sy] = True
+        distance[sx][sy] = 1
+        
+        while queue:
+            x, y = queue.popleft()
             
-            if not (0 <= nx < n and 0 <= ny < m):
-                continue
-            if maps[nx][ny] == 0:
-                continue
-            if dist[nx][ny] != 0:
-                continue
+            for dx, dy in ((1,0), (-1,0), (0,1), (0,-1)):
+                nx = x + dx
+                ny = y + dy
+
+                if 0 <= nx < n and 0 <= ny < m:
+                    if not visited[nx][ny] and maps[nx][ny] == 1:
+                        visited[nx][ny] = True
+                        distance[nx][ny] = distance[x][y] + 1
+                        queue.append((nx,ny))
                 
-            dist[nx][ny] = dist[x][y] + 1
-            
-            q.append((nx,ny))
-            
-    return dist[n-1][m-1] if dist[n-1][m-1] != 0 else -1
+    bfs(0,0)
+    
+    return distance[n-1][m-1] if distance[n-1][m-1] > 0 else -1
