@@ -1,22 +1,26 @@
 def solution(word):
-    count = 0
     answer = 0
+    count = 1
     
-    def dfs(alpa): 
+    def dfs(alpa):
         nonlocal count, answer
         
-        if alpa == word:
-            answer = count 
-            return count
-        
-        if len(alpa) > 5:
-            return 
-        
-        count += 1
+        words = ""
         
         for i in "AEIOU":
-            dfs(alpa + i)
-
-    dfs("")
+            words = alpa + i
+            print(words)
+            
+            if words == word:
+                answer = count
+        
+            if len(words) > 5:
+                return
+        
+            count += 1
+            
+            dfs(words)
     
+    dfs("")
+            
     return answer
