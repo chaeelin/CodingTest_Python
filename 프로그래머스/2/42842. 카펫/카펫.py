@@ -1,11 +1,15 @@
 def solution(brown, yellow):
     answer = []
+    total = brown + yellow
+    result = []
+
     
-    for i in range(1, yellow + 1):
-        if yellow % i == 0:
-            w = i + 2
-            h = (yellow // i) + 2 
-            if brown == w * h - (w-2) * (h-2):
-                answer = [w, h]
-                
+    for i in range(1, total + 1):
+        if total % i == 0 and i<= total // i:
+            result.append((i, total // i))
+
+    for a,b in result:
+        if (a-2) * (b-2) == yellow:
+            answer.extend([b,a])
+
     return answer
